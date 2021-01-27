@@ -14,8 +14,7 @@ services:
       logging:
         options:
           tag: 'ImageName:{{.ImageName}}/Name:{{.Name}}/ID:{{.ID}}/ImageFullID:{{.ImageFullID}}'
-      depends_on:
-        - nominatim-postgres
+
 
 
   nominatim-postgres:
@@ -27,8 +26,8 @@ services:
       ports:
         - "6432:5432"
       entrypoint: /startpostgres.sh
-      #volumes:
-       # - ./data/nominatim-data/postgresdata:/var/lib/postgresql/12/main:z
+      volumes:
+        - ./data/:/var/lib/postgresql/12/main:z
       environment:
         with_postcodes_us: with_postcodes_us
         with_postcodes_gb: with_postcodes_gb
