@@ -25,10 +25,10 @@ services:
          - inbound
       restart: unless-stopped
       ports:
-        - "5432:6432"
+        - "6432:5432"
       entrypoint: /startpostgres.sh
-      volumes:
-        - ./data/nominatim-data/postgresdata:/var/lib/postgresql/12/main:z
+      #volumes:
+       # - ./data/nominatim-data/postgresdata:/var/lib/postgresql/12/main:z
       environment:
         with_postcodes_us: with_postcodes_us
         with_postcodes_gb: with_postcodes_gb
