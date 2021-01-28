@@ -11,7 +11,6 @@ services:
       ports:
         - "7070:8080"
         - "6432:5432"
-      entrypoint: /docker-entrypoint.sh
       volumes:
         - ./data/nominatim-data:/data:z
       environment:
