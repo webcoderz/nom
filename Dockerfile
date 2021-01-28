@@ -101,11 +101,9 @@ RUN echo "host all  all    0.0.0.0/0  trust" >> /etc/postgresql/12/main/pg_hba.c
 
 # Set the entrypoint
 COPY docker-entrypoint.sh /
-COPY startapache.sh /
-COPY startpostgres.sh /
+
 RUN chmod +x /docker-entrypoint.sh
-RUN chmod +x /startapache.sh
-RUN chmod +x /startpostgres.sh
+
 
 
 

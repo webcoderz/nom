@@ -10,48 +10,18 @@ services:
       restart: unless-stopped
       ports:
         - "7070:8080"
-      entrypoint: /startapache.sh
-      logging:
-        options:
-          tag: 'ImageName:{{.ImageName}}/Name:{{.Name}}/ID:{{.ID}}/ImageFullID:{{.ImageFullID}}'
-
-
-
-  nominatim-postgres:
-      build: .
-      tty: true
-      networks:
-         - inbound
-      restart: unless-stopped
-      ports:
         - "6432:5432"
-      entrypoint: /startpostgres.sh
-      volumes:
-        - ./data/:/var/lib/postgresql/12/main:z
-      environment:
-        with_postcodes_us: with_postcodes_us
-        with_postcodes_gb: with_postcodes_gb
-      logging:
-        options:
-          tag: 'ImageName:{{.ImageName}}/Name:{{.Name}}/ID:{{.ID}}/ImageFullID:{{.ImageFullID}}'
-
-
-  nominatim-postgres-init:
-      build: .
-      tty: true
-      networks:
-         - inbound
+      entrypoint: /docker-entrypoint.sh
       volumes:
         - ./data/nominatim-data:/data:z
-      entrypoint: /docker-entrypoint.sh
       environment:
         with_postcodes_us: "True"
         with_postcodes_gb: "True"
       logging:
         options:
           tag: 'ImageName:{{.ImageName}}/Name:{{.Name}}/ID:{{.ID}}/ImageFullID:{{.ImageFullID}}'
-      depends_on:
-        - nominatim-postgres
+
+
 
 
 networks:
