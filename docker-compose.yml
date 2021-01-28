@@ -12,10 +12,7 @@ services:
         - "7070:8080"
         - "6432:5432"
       volumes:
-        - ./data/nominatim-data:/data:z
-      environment:
-        with_postcodes_us: "True"
-        with_postcodes_gb: "True"
+        - ./data/nominatim-data:/data
       logging:
         options:
           tag: 'ImageName:{{.ImageName}}/Name:{{.Name}}/ID:{{.ID}}/ImageFullID:{{.ImageFullID}}'
