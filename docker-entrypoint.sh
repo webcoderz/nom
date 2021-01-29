@@ -10,7 +10,7 @@ PG_DIR=${PG_DIR:="postgresdata"}
 service postgresql start
 export PGDATA=/data/$PG_DIR
 
-if [ -z "$(ls -A /data/$PG_DIR)" ]; then
+if [ -z "$(ls -A /data/$PG_DIR)" ] || [ "$ENABLE_IMPORT" = False ]; then
    echo "[*] starting data import and database initialization"
    # Retrieve the PBF file
    curl -L $NOMINATIM_PBF_URL --create-dirs -o $NOMINATIM_DATA_PATH/$NOMINATIM_DATA_LABEL.osm.pbf
@@ -20,7 +20,7 @@ if [ -z "$(ls -A /data/$PG_DIR)" ]; then
 
 
 # Import data download
-#rm -rf /data/postgresdata
+   rm -rf /data/$PG_DIR
    mkdir -p /data/$PG_DIR
    chown postgres:postgres /data/$PG_DIR
 
@@ -38,14 +38,12 @@ if [ -z "$(ls -A /data/$PG_DIR)" ]; then
    #sudo chown -R postgres:postgres /data/$PG_DIR
 
 else
-   echo "[*] Database not Empty importing from existing database"
+   echo "[*] Importing from existing database"
    chown postgres:postgres /data/$PG_DIR
-
    sudo -u postgres /usr/lib/postgresql/12/bin/initdb -D  /data/$PG_DIR
    sudo -u postgres /usr/lib/postgresql/12/bin/pg_ctl -D /data/$PG_DIR start
    sudo -u postgres psql postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='nominatim'" | grep -q 1 || sudo -u postgres createuser -s nominatim
    sudo -u postgres psql postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='www-data'" | grep -q 1 || sudo -u postgres createuser -SDR www-data
-
 fi
 
 

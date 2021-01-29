@@ -13,6 +13,8 @@ services:
         - "6432:5432"
       volumes:
         - ./data/nominatim-data:/data
+      environment:
+        - ENABLE_IMPORT=True
       logging:
         options:
           tag: 'ImageName:{{.ImageName}}/Name:{{.Name}}/ID:{{.ID}}/ImageFullID:{{.ImageFullID}}'
