@@ -10,7 +10,7 @@ PG_DIR=${PG_DIR:="postgresdata"}
 service postgresql start
 export PGDATA=/data/$PG_DIR
 
-if [ -z "$(ls -A /data/$PG_DIR)" ] || [ "$ENABLE_IMPORT" = False ]; then
+if [[ (-z "$(ls -A /data/$PG_DIR)")  ]]; then
    echo "[*] starting data import and database initialization"
    # Retrieve the PBF file
    curl -L $NOMINATIM_PBF_URL --create-dirs -o $NOMINATIM_DATA_PATH/$NOMINATIM_DATA_LABEL.osm.pbf
@@ -44,6 +44,7 @@ else
    sudo -u postgres /usr/lib/postgresql/12/bin/pg_ctl -D /data/$PG_DIR start
    sudo -u postgres psql postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='nominatim'" | grep -q 1 || sudo -u postgres createuser -s nominatim
    sudo -u postgres psql postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='www-data'" | grep -q 1 || sudo -u postgres createuser -SDR www-data
+
 fi
 
 
