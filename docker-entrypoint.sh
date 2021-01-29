@@ -10,6 +10,8 @@ PG_DIR=${PG_DIR:="postgresdata"}
 service postgresql start
 export PGDATA=/data/$PG_DIR
 
+
+#if [[ (-z "$(ls -A /data/$PG_DIR)") || ("$ENABLE_IMPORT" = False) ]]; then
 if [[ (-z "$(ls -A /data/$PG_DIR)")  ]]; then
    echo "[*] starting data import and database initialization"
    # Retrieve the PBF file
