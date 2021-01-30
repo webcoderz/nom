@@ -11,8 +11,8 @@ service postgresql start
 export PGDATA=/data/$PG_DIR
 
 
-#if [[ (-z "$(ls -A /data/$PG_DIR)") || ("$ENABLE_IMPORT" = False) ]]; then
-if [[ (-z "$(ls -A /data/$PG_DIR)")  ]]; then
+#if [[ (-z "$(ls -A /data/$PG_DIR)") || ("$ENABLE_IMPORT" = "False") ]]; then
+if [ -z "$(ls -A /data/$PG_DIR)"  ]; then
    echo "[*] starting data import and database initialization"
    # Retrieve the PBF file
    curl -L $NOMINATIM_PBF_URL --create-dirs -o $NOMINATIM_DATA_PATH/$NOMINATIM_DATA_LABEL.osm.pbf
@@ -24,8 +24,9 @@ if [[ (-z "$(ls -A /data/$PG_DIR)")  ]]; then
 # Import data download
    rm -rf /data/$PG_DIR
    mkdir -p /data/$PG_DIR
-   chown postgres:postgres /data/$PG_DIR
 
+
+   chown postgres:postgres /data/$PG_DIR
    sudo -u postgres /usr/lib/postgresql/12/bin/initdb -D /data/$PG_DIR
    sudo -u postgres /usr/lib/postgresql/12/bin/pg_ctl -D /data/$PG_DIR start
 
@@ -38,15 +39,19 @@ if [[ (-z "$(ls -A /data/$PG_DIR)")  ]]; then
    sudo -u nominatim ./srv/nominatim/build/utils/check_import_finished.php
    sudo -u postgres /usr/lib/postgresql/12/bin/pg_ctl -D /data/$PG_DIR stop
    #sudo chown -R postgres:postgres /data/$PG_DIR
+fi
 
-else
+
+
+if [[ ("$ENABLE_IMPORT" = "True") ]]; then
    echo "[*] Importing from existing database"
    chown postgres:postgres /data/$PG_DIR
    sudo -u postgres /usr/lib/postgresql/12/bin/initdb -D  /data/$PG_DIR
    sudo -u postgres /usr/lib/postgresql/12/bin/pg_ctl -D /data/$PG_DIR start
    sudo -u postgres psql postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='nominatim'" | grep -q 1 || sudo -u postgres createuser -s nominatim
    sudo -u postgres psql postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='www-data'" | grep -q 1 || sudo -u postgres createuser -SDR www-data
-
+   sudo -u nominatim ./srv/nominatim/build/utils/check_import_finished.php
+   sudo -u postgres /usr/lib/postgresql/12/bin/pg_ctl -D /data/$PG_DIR stop
 fi
 
 
