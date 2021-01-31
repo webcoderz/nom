@@ -20,8 +20,6 @@ services:
       image: caddy:2
       volumes:
         - ./data/caddy/Caddyfile:/etc/caddy/Caddyfile
-        - ./data/caddy/data:/data
-        - ./data/caddy/config:/config
       ports:
         - 80:80
         - 443:443
