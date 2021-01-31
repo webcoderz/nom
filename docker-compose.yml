@@ -17,7 +17,7 @@ services:
         options:
           tag: 'ImageName:{{.ImageName}}/Name:{{.Name}}/ID:{{.ID}}/ImageFullID:{{.ImageFullID}}'
   caddy:
-      image: caddy:2-alpine
+      image: caddy:2
       volumes:
         - ./data/caddy/Caddyfile:/etc/caddy/Caddyfile
         - ./data/caddy/data:/data
