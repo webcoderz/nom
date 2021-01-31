@@ -8,6 +8,3 @@
 nominatim.projectdomino.org {
     reverse_proxy nominatim-rest_api:7070
 }
-www.nominatim.projectdomino.org  {
-    redir https://nominatim.projectdomino.org{uri}
-}
