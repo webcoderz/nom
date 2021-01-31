@@ -4,9 +4,8 @@ services:
 
   nominatim-rest_api:
       build: .
-      tty: true
       networks:
-         - inbound
+         - grph_net
       restart: unless-stopped
       ports:
         - "7070:8080"
@@ -24,10 +23,12 @@ services:
         - 80:80
         - 443:443
       networks:
-          - inbound
+          - grph_net
 
 
 
 networks:
-  inbound:
-
+  grph_net:
+    name: grph_net
+    ipam:
+      driver: default
