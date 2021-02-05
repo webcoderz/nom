@@ -14,6 +14,7 @@ export PGDATA=/data/$PG_DIR
 #if [[ (-z "$(ls -A /data/$PG_DIR)") || ("$ENABLE_IMPORT" = False) ]]; then
 if [ -z "$(ls -A /data/$PG_DIR)"  ]; then
    echo "[*] starting database initialization"
+   echo " "
    # Retrieve the PBF file
    curl -L $NOMINATIM_PBF_URL --create-dirs -o $NOMINATIM_DATA_PATH/$NOMINATIM_DATA_LABEL.osm.pbf
    # Allow user accounts read access to the data
