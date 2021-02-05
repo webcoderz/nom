@@ -1,13 +1,12 @@
 {
   #LE contact
   email info@projectdomino.org
-
 }
 
 
 nominatim.projectdomino.org  {
 
-		reverse_proxy <box_ip>:80
+		reverse_proxy 34.83.136.128:80
 
 
 	}
