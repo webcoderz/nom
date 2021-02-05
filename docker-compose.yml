@@ -1,29 +1,31 @@
-version: '3.4'
+version: '3.5'
 
 services:
 
-  nominatim-rest_api:
-      build: .
-      networks:
-         - grph_net
-      restart: unless-stopped
-      ports:
-        - "7070:8080"
-        - "6432:5432"
-      volumes:
-        - ./data/nominatim-data:/data
-      logging:
-        options:
-          tag: 'ImageName:{{.ImageName}}/Name:{{.Name}}/ID:{{.ID}}/ImageFullID:{{.ImageFullID}}'
-  caddy:
+  caddy-reverse-proxy:
       image: caddy:2
       volumes:
         - ./data/caddy/Caddyfile:/etc/caddy/Caddyfile
       ports:
-        - 80:80
         - 443:443
       networks:
           - grph_net
+      logging:
+        options:
+          tag: 'ImageName:{{.ImageName}}/Name:{{.Name}}/ID:{{.ID}}/ImageFullID:{{.ImageFullID}}'
+
+
+
+  nominatim-rest_api:
+      build: .
+      networks:
+          - grph_net
+      restart: unless-stopped
+      ports:
+        - "80:8080"
+        - "6432:5432"
+      volumes:
+        - ./data/nominatim-data:/data:z
 
 
 
@@ -32,3 +34,4 @@ networks:
     name: grph_net
     ipam:
       driver: default
+

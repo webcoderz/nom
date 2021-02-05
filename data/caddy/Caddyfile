@@ -1,7 +1,15 @@
 {
   #LE contact
   email info@projectdomino.org
+
 }
-nominatim.projectdomino.org {
-  reverse_proxy nominatim-rest_api:7070
-}
+
+
+nominatim.projectdomino.org  {
+
+		reverse_proxy <box_ip>:80
+
+
+	}
+
+
