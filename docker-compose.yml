@@ -23,7 +23,6 @@ services:
       restart: unless-stopped
       ports:
         - "80:8080"
-        - "6432:5432"
       volumes:
         - ./data/nominatim-data:/data:z
 
