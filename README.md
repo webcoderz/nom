@@ -4,7 +4,7 @@
 
 *postgres is tuned for a 64 gb machine*
 
-
+*setup.php is tuned to 16 threads*
 
 For the initial import, you should also set: <br>
 fsync = off <br>
