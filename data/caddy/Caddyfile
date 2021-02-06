@@ -6,7 +6,7 @@
 
 nominatim.projectdomino.org  {
 
-		reverse_proxy 34.83.136.128:80
+		reverse_proxy box_ip:80
 
 
 	}
