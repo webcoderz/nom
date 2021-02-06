@@ -25,7 +25,7 @@ services:
         - "80:8080"
       volumes:
         - /datadrive/nominatim:/data:z
-        - ./postgres.conf:/etc/postgresql/12/main/postgresql.conf
+        - ./postgresql.conf:/etc/postgresql/12/main/postgresql.conf
 
 
 
