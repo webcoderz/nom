@@ -24,7 +24,7 @@ services:
       ports:
         - "80:8080"
       volumes:
-        - ./data/nominatim-data:/data:z
+        - /datadrive/nominatim:/data:z
 
 
 
