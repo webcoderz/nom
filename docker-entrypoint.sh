@@ -1,12 +1,10 @@
 #!/bin/bash
 
 # Defaults
-NOMINATIM_DATA_PATH=${NOMINATIM_DATA_PATH:="/data/nominatim-data"}
-NOMINATIM_DATA_LABEL=${NOMINATIM_DATA_LABEL:="north_america-data"}
+NOMINATIM_DATA_PATH=${NOMINATIM_DATA_PATH:="/srv/nominatim/data/download"}
+NOMINATIM_DATA_LABEL=${NOMINATIM_DATA_LABEL:="us-data"}
 NOMINATIM_PBF_URL=${NOMINATIM_PBF_URL:="http://download.geofabrik.de/north-america/us-latest.osm.pbf"}
 PG_DIR=${PG_DIR:="postgresdata"}
-
-
 
 # Start PostgreSQL
 service postgresql start
