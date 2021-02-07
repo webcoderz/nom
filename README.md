@@ -15,3 +15,6 @@ Node is tuned to receive *North America* with continuous updates upon import <br
 can change by environment variable on the compose or in the **docker-entrypoint.sh** or **local.php**
 
 in **data/caddy/Caddyfile**  *box_ip* should be replaced with the IP of your server.
+
+
+***for further information see the administration guide at https://nominatim.org/release-docs/latest/admin/Installation/***
