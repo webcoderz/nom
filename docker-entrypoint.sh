@@ -7,8 +7,8 @@ NOMINATIM_PBF_URL=${NOMINATIM_PBF_URL:="http://download.geofabrik.de/north-ameri
 PG_DIR=${PG_DIR:="postgresdata"}
 
 # Start PostgreSQL
-service postgresql start
-export PGDATA=/data/$PG_DIR
+#service postgresql start
+#export PGDATA=/data/$PG_DIR
 
 
 #if [[ (-z "$(ls -A /data/$PG_DIR)") || ("$ENABLE_IMPORT" = False) ]]; then
@@ -26,6 +26,7 @@ if [ -z "$(ls -A /data/$PG_DIR)"  ]; then
 # Import data download
    rm -rf /data/$PG_DIR
    mkdir -p /data/$PG_DIR
+   export PGDATA=/data/$PG_DIR
    chown postgres:postgres /data/$PG_DIR
 
    sudo -u postgres /usr/lib/postgresql/12/bin/initdb -D /data/$PG_DIR
