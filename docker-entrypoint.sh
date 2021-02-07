@@ -11,7 +11,7 @@ service postgresql start
 #export PGDATA=/data/$PG_DIR
 chmod -R +r /data
 
-#if [[ (-z "$(ls -A /data/$PG_DIR)") || ("$ENABLE_IMPORT" = False) ]]; then
+
 if [ -z "$(ls -A /data/$PG_DIR)"  ]; then
    echo "[*] starting database initialization"
    echo " "
