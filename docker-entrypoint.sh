@@ -1,10 +1,12 @@
 #!/bin/bash
 
 # Defaults
-NOMINATIM_DATA_PATH=${NOMINATIM_DATA_PATH:="/srv/nominatim/data"}
-NOMINATIM_DATA_LABEL=${NOMINATIM_DATA_LABEL:="data"}
+NOMINATIM_DATA_PATH=${NOMINATIM_DATA_PATH:="/data/nominatim/data"}
+NOMINATIM_DATA_LABEL=${NOMINATIM_DATA_LABEL:="north_america-data"}
 NOMINATIM_PBF_URL=${NOMINATIM_PBF_URL:="http://download.geofabrik.de/north-america/us-latest.osm.pbf"}
 PG_DIR=${PG_DIR:="postgresdata"}
+
+
 
 # Start PostgreSQL
 service postgresql start
@@ -16,6 +18,7 @@ if [ -z "$(ls -A /data/$PG_DIR)"  ]; then
    echo "[*] starting database initialization"
    echo " "
    # Retrieve the PBF file
+   mkdir -p $NOMINATIM_DATA_PATH
    curl -L $NOMINATIM_PBF_URL --create-dirs -o $NOMINATIM_DATA_PATH/$NOMINATIM_DATA_LABEL.osm.pbf
    # Allow user accounts read access to the data
    chmod 755 $NOMINATIM_DATA_PATH
