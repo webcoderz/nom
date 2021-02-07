@@ -6,7 +6,7 @@
 
 *setup.php is tuned to 16 threads*
 
-For the initial import, you should also set: <br>
+For the initial import, the following are set: <br>
 fsync = off <br>
 full_page_writes = off <br>
 ***Don't forget to reenable them after the initial import or you risk database corruption.***
