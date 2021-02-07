@@ -2,14 +2,14 @@
 
 # Defaults
 NOMINATIM_DATA_PATH=${NOMINATIM_DATA_PATH:="/srv/nominatim/data/download"}
-NOMINATIM_DATA_LABEL=${NOMINATIM_DATA_LABEL:="us-data"}
+NOMINATIM_DATA_LABEL=${NOMINATIM_DATA_LABEL:="data"}
 NOMINATIM_PBF_URL=${NOMINATIM_PBF_URL:="http://download.geofabrik.de/north-america/us-latest.osm.pbf"}
 PG_DIR=${PG_DIR:="postgresdata"}
 
 # Start PostgreSQL
-#service postgresql start
+service postgresql start
 #export PGDATA=/data/$PG_DIR
-
+chmod -R +r /data
 
 #if [[ (-z "$(ls -A /data/$PG_DIR)") || ("$ENABLE_IMPORT" = False) ]]; then
 if [ -z "$(ls -A /data/$PG_DIR)"  ]; then
@@ -26,7 +26,8 @@ if [ -z "$(ls -A /data/$PG_DIR)"  ]; then
 # Import data download
    rm -rf /data/$PG_DIR
    mkdir -p /data/$PG_DIR
-   export PGDATA=/data/$PG_DIR
+   chmod -R +r /data/$PG_DIR
+   #export PGDATA=/data/$PG_DIR
    chown postgres:postgres /data/$PG_DIR
 
    sudo -u postgres /usr/lib/postgresql/12/bin/initdb -D /data/$PG_DIR
