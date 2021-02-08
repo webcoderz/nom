@@ -45,6 +45,7 @@ if [ -z "$(ls -A /data/$PG_DIR)"  ]; then
 
 else
    echo "[*] Importing from existing database"
+   chmod 755 /data/$PG_DIR
    chown postgres:postgres /data/$PG_DIR
    #sudo -u postgres /usr/lib/postgresql/12/bin/initdb -D  /data/$PG_DIR
    sudo -u postgres /usr/lib/postgresql/12/bin/pg_ctl -D /data/$PG_DIR start
