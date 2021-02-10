@@ -27,7 +27,7 @@ if [ -z "$(ls -A /data/$PG_DIR)"  ]; then
    rm -rf /data/$PG_DIR
    mkdir -p /data/$PG_DIR
    chmod 755 /data/$PG_DIR
-   #export PGDATA=/data/$PG_DIR
+   export PGDATA=/data/$PG_DIR
    chown postgres:postgres /data/$PG_DIR
 
    sudo -u postgres /usr/lib/postgresql/12/bin/initdb -D /data/$PG_DIR
