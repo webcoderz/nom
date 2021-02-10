@@ -1,6 +1,6 @@
 # Project Domino Nominatim node #
 
-
+Machine Specifications: 4 cores or greater, 64GB memory 1TB NVME
 
 *postgres is tuned for a 64 gb machine*
 
