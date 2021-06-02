@@ -1,4 +1,4 @@
-# Nominatim node #
+# Nom-Nom: Nominatim node #
 
 Machine Specifications: ***4 cores or greater, 64GB memory 1TB NVME***
 
