@@ -1,10 +1,10 @@
 {
   #LE contact
-  email info@projectdomino.org
+  email <email addr>
 }
 
 
-nominatim.projectdomino.org  {
+nominatim.<domain&tld>  {
 
 		reverse_proxy box_ip:80
 
