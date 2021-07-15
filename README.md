@@ -14,8 +14,8 @@ full_page_writes = off <br>
  
 ```bash 
 su - postgres 
-2: export PGDATA=/data/postgresdata
-3: /usr/lib/postgresql/12/bin/pg_ctl reload 
+export PGDATA=/data/postgresdata
+/usr/lib/postgresql/12/bin/pg_ctl reload 
 ```
 
 Node is tuned to receive *North America* with continuous updates upon import <br>
