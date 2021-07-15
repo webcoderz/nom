@@ -15,7 +15,8 @@ full_page_writes = off <br>
 ```bash 
 su - postgres 
 2: export PGDATA=/data/postgresdata
-3: /usr/lib/postgresql/12/bin/pg_ctl reload ```
+3: /usr/lib/postgresql/12/bin/pg_ctl reload 
+```
 
 Node is tuned to receive *North America* with continuous updates upon import <br>
 can change by environment variable on the compose or in the **docker-entrypoint.sh** or **local.php**
